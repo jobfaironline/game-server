@@ -1,4 +1,6 @@
-import geckos from '@geckos.io/server'
+import geckos, {iceServers} from '@geckos.io/server'
+
+
 
 
 const roomData = {};
@@ -7,7 +9,8 @@ const io = geckos({
   authorization: async (auth, request, response) => {
     const [companyBoothId, userId, initialPosition, initialQuaternion] = auth.split('/')
     return {companyBoothId: companyBoothId, userId, initialPosition: JSON.parse(initialPosition), initialQuaternion: JSON.parse(initialQuaternion)};
-  }
+  },
+  iceServers: iceServers
 })
 
 io.listen(3001) // default port is 9208
