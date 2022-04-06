@@ -5,13 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@geckos.io/server": "^2.1.8"
+    "@geckos.io/server": "^2.1.8",
+    "simple-node-logger": "^21.8.12"
   }
 }
