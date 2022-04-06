@@ -8,11 +8,11 @@ export default class Logger{
     const date = ("0" + dateObj.getDate()).slice(-2);
     const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
     const year = dateObj.getFullYear();
-    if (!fs.existsSync("log")){
-      fs.mkdirSync("log");
+    if (!fs.existsSync("logs")){
+      fs.mkdirSync("logs");
     }
 
-    this.logger = createSimpleLogger(`log/${year}-${month}-${date}-server.log`);
+    this.logger = createSimpleLogger(`logs/${year}-${month}-${date}-server.log`);
   }
   info(...obj){
     this.logger.info(...obj);
