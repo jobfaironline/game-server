@@ -1,10 +1,10 @@
-import geckos, {iceServers} from "@geckos.io/server";
+import geckos from "@geckos.io/server";
 import CharacterState from "./CharacterState.js";
 import Position from "./Position.js";
 import Quaternion from "./Quaternion.js";
 
 export default class Server {
-  constructor(port, logger) {
+  constructor(port, logger, iceServers) {
     this.port = port;
     this.logger = logger;
     this.roomData = {}
