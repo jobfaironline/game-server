@@ -15,10 +15,10 @@ export default class Logger{
     this.logger = createSimpleLogger(`log/${year}-${month}-${date}-server.log`);
   }
   info(...obj){
-    this.logger.info(obj);
+    this.logger.info(...obj);
   }
 
   error(...obj){
-    this.logger.error(obj);
+    this.logger.error(...obj);
   }
 }
