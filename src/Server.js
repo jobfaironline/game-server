@@ -42,9 +42,9 @@ export default class Server {
       channel.broadcast.emit('new-user-connect', JSON.stringify(characterState));
 
       channel.onDisconnect(() => {
-        this.logger.info("user-left", userId)
+        this.logger.info("user-left", `roomId: ${companyBoothId}`, userId)
         this.roomData[companyBoothId] = this.roomData[companyBoothId].filter(state => state.id !== userId);
-        channel.broadcast.emit('user-left', `roomId: ${companyBoothId}`, userId)
+        channel.broadcast.emit('user-left', userId)
       })
 
 
