@@ -96,7 +96,7 @@ export default class Server {
     this.app.get('/get-room-data/:pass', function (req, res) {
       let pass = req.params.pass;
       if (pass !== process.env.ADMIN_PASS){
-        return res.send(404, "Not-found");
+        return res.send("Not-found");
       }
       return res.send(self.roomData)
     });
