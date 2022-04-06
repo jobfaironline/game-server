@@ -48,7 +48,7 @@ export default class Server {
             this.roomData[companyBoothId] = this.roomData[companyBoothId].filter(state => state.id !== userId);
             channel.broadcast.emit('user-left', userId)
           } catch (e) {
-            this.logger.error(e);
+            this.logger.error(e.stack);
           }
         })
 
@@ -64,7 +64,7 @@ export default class Server {
             // emit the "chat message" data to all channels in the same room
             channel.broadcast.emit('move', obj)
           } catch (e) {
-            this.logger.error(e);
+            this.logger.error(e.stack);
           }
 
         })
@@ -76,11 +76,11 @@ export default class Server {
               channel.broadcast.emit('stop', state)
             }
           } catch (e) {
-            this.logger.error(e)
+            this.logger.error(e.stack)
           }
         })
       } catch (e) {
-        this.logger.error(e);
+        this.logger.error(e.stack);
       }
     })
   }
@@ -90,7 +90,7 @@ export default class Server {
     try {
       this.init();
     } catch (e) {
-      this.logger.error(e);
+      this.logger.error(e.stack);
     }
   }
 }
