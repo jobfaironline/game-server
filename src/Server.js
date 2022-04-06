@@ -37,14 +37,14 @@ export default class Server {
       const characterState = new CharacterState(userId, new Position(initialPosition.x, initialPosition.y, initialPosition.z), new Quaternion(initialQuaternion.x, initialQuaternion.y, initialQuaternion.z, initialQuaternion.w));
       this.roomData[companyBoothId].push(characterState)
 
-      this.logger.info("new-user-connect", characterState)
+      this.logger.info("new-user-connect", `roomId: ${companyBoothId}`, characterState)
       channel.join(companyBoothId);
       channel.broadcast.emit('new-user-connect', JSON.stringify(characterState));
 
       channel.onDisconnect(() => {
         this.logger.info("user-left", userId)
         this.roomData[companyBoothId] = this.roomData[companyBoothId].filter(state => state.id !== userId);
-        channel.broadcast.emit('user-left', userId)
+        channel.broadcast.emit('user-left', `roomId: ${companyBoothId}`, userId)
       })
 
 
@@ -70,9 +70,9 @@ export default class Server {
 
   start() {
     this.io.listen(this.port);
-    try{
+    try {
       this.init();
-    } catch (e){
+    } catch (e) {
       this.logger.error(e);
     }
   }
