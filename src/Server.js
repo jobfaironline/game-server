@@ -2,12 +2,17 @@ import geckos from "@geckos.io/server";
 import CharacterState from "./CharacterState.js";
 import Position from "./Position.js";
 import Quaternion from "./Quaternion.js";
+import express from "express"
+import http from 'http'
+
 
 export default class Server {
   constructor(port, logger, iceServers) {
     this.port = port;
     this.logger = logger;
     this.roomData = {}
+    this.app = express()
+    this.server = http.createServer(this.app)
     this.io = geckos({
       authorization: async (auth, request, response) => {
         const [companyBoothId, userId, initialPosition, initialQuaternion] = auth.split('/')
@@ -19,10 +24,11 @@ export default class Server {
         };
       },
       iceServers: iceServers
-    })
+    });
+    this.io.addServer(this.server);
   }
 
-  init() {
+  initGeckos() {
     this.io.onConnection(channel => {
       try {
         const companyBoothId = channel.userData.companyBoothId;
@@ -85,10 +91,18 @@ export default class Server {
     })
   }
 
+  initExpress(){
+    const self = this;
+    this.app.get('/', function (req, res) {
+      return res.send(self.roomData)
+    });
+  }
+
   start() {
     this.io.listen(this.port);
     try {
-      this.init();
+      this.initGeckos();
+      this.initExpress();
     } catch (e) {
       this.logger.error(e.stack);
     }
