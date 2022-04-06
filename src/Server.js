@@ -99,7 +99,7 @@ export default class Server {
   }
 
   start() {
-    this.io.listen(this.port);
+    this.server.listen(this.port);
     try {
       this.initGeckos();
       this.initExpress();
