@@ -93,7 +93,11 @@ export default class Server {
 
   initExpress(){
     const self = this;
-    this.app.get('/', function (req, res) {
+    this.app.get('/get-room-data/', function (req, res) {
+      let pass = req.params.id;
+      if (pass !== process.env.ADMIN_PASS){
+        return res.send(404, "Not-found");
+      }
       return res.send(self.roomData)
     });
   }
