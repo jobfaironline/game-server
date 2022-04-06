@@ -24,47 +24,64 @@ export default class Server {
 
   init() {
     this.io.onConnection(channel => {
-      const companyBoothId = channel.userData.companyBoothId;
-      const userId = channel.userData.userId;
-      const initialPosition = channel.userData.initialPosition;
-      const initialQuaternion = channel.userData.initialQuaternion;
+      try {
+        const companyBoothId = channel.userData.companyBoothId;
+        const userId = channel.userData.userId;
+        const initialPosition = channel.userData.initialPosition;
+        const initialQuaternion = channel.userData.initialQuaternion;
 
-      channel.emit("init", JSON.stringify(this.roomData[companyBoothId]));
-      //add new userId to room data
-      if (this.roomData[companyBoothId] === undefined) {
-        this.roomData[companyBoothId] = [];
-      }
-      const characterState = new CharacterState(userId, new Position(initialPosition.x, initialPosition.y, initialPosition.z), new Quaternion(initialQuaternion.x, initialQuaternion.y, initialQuaternion.z, initialQuaternion.w));
-      this.roomData[companyBoothId].push(characterState)
-
-      this.logger.info("new-user-connect", `roomId: ${companyBoothId}`, characterState)
-      channel.join(companyBoothId);
-      channel.broadcast.emit('new-user-connect', JSON.stringify(characterState));
-
-      channel.onDisconnect(() => {
-        this.logger.info("user-left", `roomId: ${companyBoothId}`, userId)
-        this.roomData[companyBoothId] = this.roomData[companyBoothId].filter(state => state.id !== userId);
-        channel.broadcast.emit('user-left', userId)
-      })
-
-
-      channel.on('move', data => {
-        const obj = JSON.parse(data);
-        obj.userId = userId;
-        const state = this.roomData[companyBoothId].filter(user => user.id === userId)[0];
-        state.position.set(obj.position.x, obj.position.y, obj.position.z)
-        state.quaternion.set(obj.quaternion.x, obj.quaternion.y, obj.quaternion.z, obj.quaternion.w)
-        state.isMoving = true;
-        // emit the "chat message" data to all channels in the same room
-        channel.broadcast.emit('move', obj)
-      })
-      channel.on('stop', data => {
-        const state = this.roomData[companyBoothId].filter(user => user.id === userId)[0];
-        if (state.isMoving === true) {
-          state.isMoving = false;
-          channel.broadcast.emit('stop', state)
+        channel.emit("init", JSON.stringify(this.roomData[companyBoothId]));
+        //add new userId to room data
+        if (this.roomData[companyBoothId] === undefined) {
+          this.roomData[companyBoothId] = [];
         }
-      })
+        const characterState = new CharacterState(userId, new Position(initialPosition.x, initialPosition.y, initialPosition.z), new Quaternion(initialQuaternion.x, initialQuaternion.y, initialQuaternion.z, initialQuaternion.w));
+        this.roomData[companyBoothId].push(characterState)
+
+        this.logger.info("new-user-connect", `roomId: ${companyBoothId}`, characterState)
+        channel.join(companyBoothId);
+        channel.broadcast.emit('new-user-connect', JSON.stringify(characterState));
+
+        channel.onDisconnect(() => {
+          try {
+            this.logger.info("user-left", `roomId: ${companyBoothId}`, userId)
+            this.roomData[companyBoothId] = this.roomData[companyBoothId].filter(state => state.id !== userId);
+            channel.broadcast.emit('user-left', userId)
+          } catch (e) {
+            this.logger.error(e);
+          }
+        })
+
+
+        channel.on('move', data => {
+          try {
+            const obj = JSON.parse(data);
+            obj.userId = userId;
+            const state = this.roomData[companyBoothId].filter(user => user.id === userId)[0];
+            state.position.set(obj.position.x, obj.position.y, obj.position.z)
+            state.quaternion.set(obj.quaternion.x, obj.quaternion.y, obj.quaternion.z, obj.quaternion.w)
+            state.isMoving = true;
+            // emit the "chat message" data to all channels in the same room
+            channel.broadcast.emit('move', obj)
+          } catch (e) {
+            this.logger.error(e);
+          }
+
+        })
+        channel.on('stop', data => {
+          try {
+            const state = this.roomData[companyBoothId].filter(user => user.id === userId)[0];
+            if (state.isMoving === true) {
+              state.isMoving = false;
+              channel.broadcast.emit('stop', state)
+            }
+          } catch (e) {
+            this.logger.error(e)
+          }
+        })
+      } catch (e) {
+        this.logger.error(e);
+      }
     })
   }
 
