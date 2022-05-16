@@ -7,9 +7,10 @@ import http from 'http'
 
 
 export default class Server {
-  constructor(port, logger, iceServers) {
+  constructor(port, logger, iceServers,portRanges = {min:10000,max+10100}) {
     this.port = port;
     this.logger = logger;
+    this.portRanges = portRanges;
     this.roomData = {}
     this.app = express()
     this.server = http.createServer(this.app)
@@ -23,7 +24,9 @@ export default class Server {
           initialQuaternion: JSON.parse(initialQuaternion)
         };
       },
-      iceServers: iceServers
+      iceServers: iceServers,
+      portRanges : portRanges 
+	
     });
     this.io.addServer(this.server);
   }
@@ -112,3 +115,4 @@ export default class Server {
     }
   }
 }
+
