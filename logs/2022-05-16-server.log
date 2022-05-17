@@ -1,0 +1,6 @@
+10:22:54.090 INFO  STUN_SERVER{"urls":"stun:13.215.45.157:3478?transport=tcp","username":"lala","credential":"123456789"} 
+10:54:15.693 INFO  new-user-connect//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//{"id":"3f6eda7f-4c49-4f6c-83b2-a4c72612510a","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+10:54:58.084 INFO  new-user-connect//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//{"id":"9202b073-f95d-49a5-846b-e1ffe0dc3fc1","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+10:55:25.420 INFO  user-left//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//9202b073-f95d-49a5-846b-e1ffe0dc3fc1 
+10:55:26.795 INFO  user-left//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//3f6eda7f-4c49-4f6c-83b2-a4c72612510a 
+10:55:56.784 INFO  Server exit: SIGINT 

@@ -7,7 +7,7 @@ import http from 'http'
 
 
 export default class Server {
-  constructor(port, logger, iceServers,portRanges = {min:10000,max+10100}) {
+  constructor(port = 3001, logger, iceServers,portRanges = {min:10000,max:10100}) {
     this.port = port;
     this.logger = logger;
     this.portRanges = portRanges;

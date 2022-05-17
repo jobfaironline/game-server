@@ -1,0 +1,12 @@
+06:18:34.334 INFO  STUN_SERVER{"urls":"stun:13.215.45.157:3478?transport=tcp","username":"lala","credential":"123456789"} 
+06:18:36.771 INFO  Server exit: SIGINT 
+06:24:26.686 INFO  STUN_SERVER{"urls":"stun:13.215.45.157:3478?transport=tcp","username":"lala","credential":"123456789"} 
+06:25:11.526 INFO  Server exit: SIGINT 
+06:26:31.663 INFO  STUN_SERVER{"urls":"stun:13.215.45.157:3478?transport=tcp","username":"lala","credential":"123456789"} 
+06:27:41.662 INFO  new-user-connect//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//{"id":"9202b073-f95d-49a5-846b-e1ffe0dc3fc1","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+06:27:49.309 INFO  user-left//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//9202b073-f95d-49a5-846b-e1ffe0dc3fc1 
+06:27:52.535 INFO  new-user-connect//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//{"id":"9202b073-f95d-49a5-846b-e1ffe0dc3fc1","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+06:27:54.997 INFO  new-user-connect//roomId: 5e0679ff-db4d-429f-b8ca-a058d076e7ca//{"id":"3f6eda7f-4c49-4f6c-83b2-a4c72612510a","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+06:29:10.570 INFO  Server exit: SIGINT 
+06:29:51.820 INFO  STUN_SERVER{"urls":"stun:13.215.45.157:3478?transport=tcp","username":"lala","credential":"123456789"} 
+06:29:54.235 INFO  Server exit: SIGINT 

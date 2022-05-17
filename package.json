@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@geckos.io/client": "^2.2.0",
     "@geckos.io/server": "^2.1.8",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",

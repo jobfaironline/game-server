@@ -13,7 +13,7 @@ if (process.env.STUN_URL !== undefined) {
 
   iceServers = [stunInfo];
 }
-const server = new Server(3001, logger, iceServers);
+const server = new Server(process.env.LISTEN_PORT, logger, iceServers,{minPort : process.env.MIN_PORT, maxPort: process.env.MAX_PORT});
 server.start();
 
 process.stdin.resume();//so the program will not close instantly
