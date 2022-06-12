@@ -3,16 +3,24 @@ import CharacterState from "./CharacterState.js";
 import Position from "./Position.js";
 import Quaternion from "./Quaternion.js";
 import express from "express"
-import http from 'http'
+import https from 'https'
+import fs from "fs";
+
 
 
 export default class Server {
   constructor(port, logger, iceServers) {
-    this.port = port;
+  const key = fs.readFileSync('certs/private')
+  const cert = fs.readFileSync('certs/cert')
+  const options = {
+    key: key,
+    cert: cert
+  }
+   this.port = port;
     this.logger = logger;
     this.roomData = {}
     this.app = express()
-    this.server = http.createServer(this.app)
+    this.server = https.createServer(options, this.app)
     this.io = geckos({
       authorization: async (auth, request, response) => {
         const [companyBoothId, userId, initialPosition, initialQuaternion] = auth.split('/')
@@ -23,7 +31,8 @@ export default class Server {
           initialQuaternion: JSON.parse(initialQuaternion)
         };
       },
-      iceServers: iceServers
+      iceServers: iceServers, 
+      cors: {origin: '*', allowAuthorization: true}
     });
     this.io.addServer(this.server);
   }
