@@ -18,3 +18,9 @@
 11:09:44.572 INFO  Server exit: SIGINT 
 11:12:54.065 INFO  STUN_SERVER{"urls":"stun:18.136.91.122:3478?transport=tcp","username":"lala","credential":"123456789"} 
 11:12:56.769 INFO  Server exit: SIGINT 
+16:57:29.234 INFO  STUN_SERVER{"urls":"stun:18.136.91.122:3478?transport=tcp","username":"lala","credential":"123456789"} 
+17:02:51.518 INFO  new-user-connect//roomId: 0445be61-b99f-4ecd-9c5b-61e78626dafb//{"id":"3f6eda7f-4c49-4f6c-83b2-a4c72612510a","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+17:03:23.157 INFO  new-user-connect//roomId: 0445be61-b99f-4ecd-9c5b-61e78626dafb//{"id":"fba88e6a-742b-4ffa-9ac7-a8058520957f","position":{"x":0,"y":1.0002028942108154,"z":0},"quaternion":{"x":0,"y":0,"z":0,"w":0},"isMoving":false} 
+17:03:38.186 INFO  user-left//roomId: 0445be61-b99f-4ecd-9c5b-61e78626dafb//fba88e6a-742b-4ffa-9ac7-a8058520957f 
+17:07:34.143 INFO  user-left//roomId: 0445be61-b99f-4ecd-9c5b-61e78626dafb//3f6eda7f-4c49-4f6c-83b2-a4c72612510a 
+17:08:15.838 INFO  Server exit: SIGINT 

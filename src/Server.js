@@ -10,7 +10,7 @@ import fs from "fs";
 
 export default class Server {
   constructor(port, logger, iceServers) {
-  const key = fs.readFileSync('certs/private')
+  const key = fs.readFileSync('certs/key')
   const cert = fs.readFileSync('certs/cert')
   const options = {
     key: key,
