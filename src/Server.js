@@ -25,6 +25,7 @@ export default class Server {
       authorization: async (auth, request, response) => {
         const [companyBoothId, userId, initialPosition, initialQuaternion] = auth.split('/')
         return {
+          fullName: fullName,
           companyBoothId: companyBoothId,
           userId,
           initialPosition: JSON.parse(initialPosition),
@@ -44,13 +45,14 @@ export default class Server {
         const userId = channel.userData.userId;
         const initialPosition = channel.userData.initialPosition;
         const initialQuaternion = channel.userData.initialQuaternion;
+        const fullName = channel.userData.fullName;
 
         channel.emit("init", JSON.stringify(this.roomData[companyBoothId]));
         //add new userId to room data
         if (this.roomData[companyBoothId] === undefined) {
           this.roomData[companyBoothId] = [];
         }
-        const characterState = new CharacterState(userId, new Position(initialPosition.x, initialPosition.y, initialPosition.z), new Quaternion(initialQuaternion.x, initialQuaternion.y, initialQuaternion.z, initialQuaternion.w));
+        const characterState = new CharacterState(userId, fullName, new Position(initialPosition.x, initialPosition.y, initialPosition.z), new Quaternion(initialQuaternion.x, initialQuaternion.y, initialQuaternion.z, initialQuaternion.w));
         this.roomData[companyBoothId].push(characterState)
 
         this.logger.info(`new-user-connect//roomId: ${companyBoothId}//`, characterState);
@@ -72,6 +74,7 @@ export default class Server {
           try {
             const obj = JSON.parse(data);
             obj.userId = userId;
+            obj.fullName = fullName;
             const state = this.roomData[companyBoothId].filter(user => user.id === userId)[0];
             state.position.set(obj.position.x, obj.position.y, obj.position.z)
             state.quaternion.set(obj.quaternion.x, obj.quaternion.y, obj.quaternion.z, obj.quaternion.w)
