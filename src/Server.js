@@ -15,7 +15,7 @@ export default class Server {
     this.server = http.createServer(this.app)
     this.io = geckos({
       authorization: async (auth, request, response) => {
-        const [companyBoothId, userId, initialPosition, initialQuaternion] = auth.split('/')
+        const [companyBoothId, userId, fullName, initialPosition, initialQuaternion] = auth.split('/')
         return {
           fullName: fullName,
           companyBoothId: companyBoothId,
